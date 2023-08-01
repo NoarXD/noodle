@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import Dashboard from './pages/Dashboard.jsx'
-// import Admin from './pages/Admin.jsx'
-import { Dashboard, Admin } from './pages'
+import Dashboard from './pages/Dashboard.jsx'
+import Admin from './pages/Admin.jsx'
+// import { Dashboard, Admin } from './pages'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
