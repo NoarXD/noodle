@@ -9,8 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' exact element={<Dashboard />}></Route>
-      <Route path='/admin' element={<Admin />}></Route>
+      <Route path='/' exact element={<Admin />}></Route>
+      <Route path='/admin' element={<Dashboard />}></Route>
     </Routes>
   </BrowserRouter>,
 )
