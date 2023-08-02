@@ -13,7 +13,7 @@ const Admin = () => {
 	const [isLogin, setIslogin] = useState(true);
 	const [formValid, setFormValid] = useState(false);
 	const [times, setTimes] = useState(0);
-	const url = "http://localhost:3000";
+	const url = "https://odd-cyan-monkey-wrap.cyclic.cloud/";
 
 	const getProductStatus = (price) => {
 		return price < 0 ? "expense" : "income";

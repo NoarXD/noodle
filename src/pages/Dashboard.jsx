@@ -5,7 +5,7 @@ import "../style/priceStatus.css";
 
 function App() {
     const [products, setProduct] = useState([]);
-    const url = "http://localhost:3000";
+    const url = "https://odd-cyan-monkey-wrap.cyclic.cloud/";
 
     const getProducts = async () => {
         try {
