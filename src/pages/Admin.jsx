@@ -12,6 +12,7 @@ const Admin = () => {
 	const [password, setPassword] = useState("");
 	const [isLogin, setIslogin] = useState(true);
 	const [formValid, setFormValid] = useState(false);
+	const [times, setTimes] = useState(0);
 	const url = "http://localhost:3000";
 
 	const getProductStatus = (price) => {
@@ -22,6 +23,9 @@ const Admin = () => {
 		Axios.get(`${url}/products`).then((res) => {
 			setProduct(res.data.reverse());
 		});
+		if (localStorage.getItem("login") === "noarmiller") {
+			setIslogin(false);
+		}
 	}, []);
 
 	const getProducts = async () => {
@@ -32,22 +36,43 @@ const Admin = () => {
 
 	const addProducts = (e) => {
 		e.preventDefault();
-		Axios.post(`${url}/add`, { title, price, date })
-			.then((res) => {
-				console.log(res);
-				getProducts();
-				Swal.fire({
-					icon: "success",
-					title: "success",
+		if (times > 0) {
+			const priceTimes = price * times
+			Axios.post(`${url}/add`, { title, price: priceTimes, date })
+				.then((res) => {
+					console.log(res);
+					getProducts();
+					Swal.fire({
+						icon: "success",
+						title: "success",
+					});
+					const inputs = document.querySelectorAll("input");
+					for (const input of inputs) {
+						input.value = "";
+					}
+				})
+				.catch((err) => {
+					console.log(err);
 				});
-				const inputs = document.querySelectorAll("input");
-				for (const input of inputs) {
-					input.value = "";
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		} else {
+			Axios.post(`${url}/add`, { title, price, date })
+				.then((res) => {
+					console.log(res);
+					getProducts();
+					Swal.fire({
+						icon: "success",
+						title: "success",
+					});
+					const inputs = document.querySelectorAll("input");
+					for (const input of inputs) {
+						input.value = "";
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+
 	};
 
 	useEffect(() => {
@@ -92,6 +117,8 @@ const Admin = () => {
 		});
 	};
 
+
+
 	return (
 		<>
 			<Navbar />
@@ -114,15 +141,27 @@ const Admin = () => {
 							<label htmlFor="price" className="form-label mb-2">
 								จำนวน
 							</label>
-							<input
-								type="number"
-								className="form-control mb-2"
-								placeholder="1500..."
-								id="myInput"
-								onChange={(event) => {
-									setPrice(event.target.value);
-								}}
-							/>
+							<div className="row">
+								<input
+									type="number"
+									className="form-control mb-2 me-5 ms-2 col"
+									placeholder="1500..."
+									id="myInput"
+
+									onChange={(event) => {
+										setPrice(event.target.value);
+									}}
+								/>
+								<input
+									type="number"
+									className="form-control mb-2 me-2 col"
+									placeholder="10..."
+									id="myInput"
+									onChange={(event) => {
+										setTimes(event.target.value);
+									}}
+								/>
+							</div>
 							<label htmlFor="date" className="form-label mb-2">
 								วันที่
 							</label>
@@ -208,7 +247,7 @@ const Admin = () => {
 									id="floatingInput"
 									placeholder="name@example.com"
 								/>
-								<label for="floatingInput">Email address</label>
+								<label htmlFor="floatingInput">Email address</label>
 							</div>
 							<div className="form-floating">
 								<input
@@ -220,7 +259,7 @@ const Admin = () => {
 									id="floatingPassword"
 									placeholder="Password"
 								/>
-								<label for="floatingPassword">Password</label>
+								<label htmlFor="floatingPassword">Password</label>
 							</div>
 							<button
 								className="btn btn-primary w-100 py-2"
