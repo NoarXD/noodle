@@ -9,6 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
       <Route path='/' exact element={<Dashboard />}></Route>
+      <Route path='/home' exact element={<Dashboard />}></Route>
       <Route path='/admin' element={<Admin />}></Route>
     </Routes>
   </BrowserRouter>,
