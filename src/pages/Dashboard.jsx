@@ -42,7 +42,6 @@ function App() {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">ชื่อรายการ</th>
                                 <th scope="col">ราคา</th>
                                 <th scope="col">วันที่</th>
@@ -52,7 +51,6 @@ function App() {
                             return (
                                 <tbody key={key}>
                                     <tr>
-                                        <td>00{val.id}</td>
                                         <td>{val.title}</td>
                                         <td>
                                             {val.price.toLocaleString("en-US")}{" "}
